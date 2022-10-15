@@ -1,0 +1,590 @@
+---
+title: "Projet Analyse de données"
+author: "BERBAGUI Amine - HACHANI Ghassen"
+date: "22/05/2022"
+output:
+  pdf_document: 
+    toc: yes
+    toc_depth: 4
+  html_document:
+    toc: yes
+---
+
+Ce jeu de données étudie les résultats en mathématiques de deux lycées au Portugal en fonction de plusieurs critères sociaux, démographiques et scolaires. On veut ainsi voir s'il y a une potentielle corrélation entre les notes d'un élève et les autres variables. Le but est d'appliquer les modèles de statistiques et de clustering vu tout au long de l'année. <br/>Pour plus d'informations sur la signification des variables, je vous invite à voir ce site directement :
+
+<http://archive.ics.uci.edu/ml/datasets/Student+Performance#>
+
+### Importation des données
+
+On importe notre csv de manière classique. On remarque déjà qu'il est assez volumineux : 33 colonnes et 395 lignes. On va nettoyer ce csv car certaines colonnes ne nous intéresse pas forcèment.
+
+```{r}
+setwd("C:/Users/Amine/Documents/#Polytech/MAIN 4/S2/Analyse de données/Projet")
+data = read.csv2("student/student-mat.csv",sep=";",header=TRUE)
+head(data)
+```
+
+### Nettoyage des données
+
+Dans un premier temps, on enlève les notes du S1(G1) , S2(G2) pour ne garder qu'une seule colonne représentant la moyenne finale car sinon, les colonnes G1,G2,G3 seront trop corréler entre elles. De plus, on a parfois des 0 comme moyennes qui peuvent poser prolème par la suite.
+
+```{r}
+for(i in 1:dim(data)[1])
+{
+  data$Average[i] = (data$G1[i] + data$G2[i])/2 
+}
+```
+
+On peut maintenant supprimer les colonnes inutiles comme le nom de l'école, le sexe, l'adresse, etc...
+
+```{r}
+# supression des colonnes inutiles
+data$guardian = NULL
+data$age      = NULL
+data$nursery  = NULL
+data$internet = NULL
+data$reason   = NULL
+data$address  = NULL
+data$sex      = NULL
+data$school   = NULL
+data$G1       = NULL
+data$Pstatus  = NULL
+data$G2       = NULL
+data$G3       = NULL
+```
+
+Comme l'on a plusieurs variables qualitatives binaire (oui/non), on les met en as factor directement pour nos futurs modèles.
+
+```{r}
+size = dim(data)[2]
+colName = names(data)
+for(i in 1:size)
+{
+  col = data[i]
+  
+  if(dim(unique(col))[1] == 2)
+  {
+    data[i] = as.factor(unlist(data[i]))
+  }
+}
+
+```
+
+```{r}
+str(data)
+```
+
+## Régression linéaire multiple
+On décide d'appliquer un modèle de régression multiple en essayant d'expliquer **Average** en fonction de studytime (temps de travail) ,famrel  (relation avec sa famille), goout (le temps de sorties) et absences. On a choisi ces variables car elles nous semblaient être les plus pertinents pour expliquer une réussite ou un échec scolaire.
+
+```{r}
+
+dataRM = data
+dataRM = data[,-c(1,2,3,4,5,6,8,9,10,11,12,13,14,16,18,19,20)]
+str(dataRM)
+```
+En traçant un boxplot de nos données, on s'aperçoit que les boites à moustaches sont très compréssées, ce qui est normal car la majorité de nos variables quantitatives prennent leurs valeurs seulement entre 0 et 5. La colonnes absences elle, contient des valeurs extrêmes comme on peut le voir. Cela correspond aux lycéens ayant un nombre d'absence très important
+```{r}
+boxplot(dataRM)
+```
+
+On pose notre modèle linéaire
+```{r}
+res=lm(Average ~., dataRM)
+```
+
+On vérifie la colinéarité entre nos variables. On a des valeurs < à 10 donc c'est bon !
+```{r}
+library(car)
+vif(res) 
+
+```
+
+### Analyse des résidus
+```{r}
+par(mfrow=c(2,2))
+plot(res)
+```
+<br/>Au niveau de l'analyse des résidus, on remarque qu'il n'y a pas de "trompette" sur nos résidus qui vérifient l'homoscédasticité. En revanche, sur le dernier graphe en bas à droite, on voit que l'on a pas mal de valeurs en dehors de [-2,2] ce qui peut poser problème. Appliquons un test de Shapiro-Wilk pour voir la normalité.
+
+```{r}
+shapiro.test(res$residuals)
+```
+On a une p-value = 0.13 > 5% donc nos résidus sont bien gaussiens. Regardons maintenant ce que cela donne avec le log
+
+```{r}
+res=lm(log(Average) ~., dataRM)
+par(mfrow=c(2,2))
+plot(res)
+```
+<br/>Le log ne semble pas arranger les choses, surtout au niveaux des valeurs atypiques. Voyons avec la racine carré.
+```{r}
+res=lm(sqrt(Average) ~., dataRM)
+par(mfrow=c(2,2))
+plot(res)
+```
+<br/>C'est beaucoup mieux avec la fonction racine. Il reste quelques points extrême à enlever mais la majorité sont dans l'intervalle [-2,2]. En revanche lorsque l'on réapplique le test de Shapiro-Wilk, nos résidus ne sont plus gaussiens. Ainsi, nous allons garder le modèle standard sans fonction appliquée dessus.
+
+
+```{r}
+shapiro.test(res$residuals)
+```
+### Suppression des points extrêmes
+On récupère les points correspondants aux valeurs extrêmes
+```{r}
+# on récupère les points plus grand que 2 en valeur absolue
+abs(rstudent(res))[abs(rstudent(res))>2]
+
+```
+On les enlève un à un à chaque fois
+```{r}
+dataRM2=dataRM[-c(130),]
+res=lm(Average ~., dataRM2)
+par(mfrow=c(2,2))
+#plot(res)
+```
+```{r}
+abs(rstudent(res))[abs(rstudent(res))>2]
+```
+
+
+```{r}
+dataRM3=dataRM2[-c(130,138),]
+res=lm(Average ~., dataRM3)
+par(mfrow=c(2,2))
+#plot(res)
+```
+<br/>La plupart de nos points extrêmes sont proche de 2 donc c'est bon.
+
+
+```{r}
+abs(rstudent(res))[abs(rstudent(res))>2]
+```
+```{r}
+shapiro.test(res$residuals)
+```
+### Points Leviers
+
+Regardons si nos points de leviers risquent de perturber le modèle
+
+```{r}
+dim(dataRM3)
+```
+
+```{r}
+n = nrow(dataRM3)
+p = ncol(dataRM3)
+inflm.SR <- influence.measures(res)
+leviers= inflm.SR$infmat[,"hat"]
+2*p/n
+```
+On a 23 observations avec des leviers trop grands. Voyons s'ils perturbent le modèle
+```{r}
+leviers[leviers>2*p/n]
+```
+```{r}
+obs = 277
+dataRM[obs,]  
+```
+
+On a visualisé les points leviers et ils ne semblent pas perturber le modèle. En revanche, on voit clairement que nos données ne représente pas un comportement linéaire nous permettant de faire de la régression. Comme nos variables quantitatives ne peuvent prendre qu'une valeur dans un intervalle réduit (0 à 5), cela nous donne des graphes avec des points homogénéiquement distribués en ligne ou en colonne mais ne formant pas de lien entre eux.
+Finalement, la régression multiplie ne semble pas être pertinente dans notre jeu de données.
+
+## Classification non supervisée
+On passe maintenant à la classification non supervisée qui va nous permettre de faire du clustering sur nos données, c'est-à-dire de trouver une partition des individus en **K** classes à partir d'observations. On ne connait pas **K**, donc on fait une recherche à l'aveugle pour justement trouver un K optimal.
+On garde les variables qui nous intéresse
+
+### CAH
+On applique la CAH pour trouver K. On crée un nouveau jeu de données correspondant. Comme la colonne **failures** est de niveau 4 (0,1,2,3), on l'a modifié de sorte à ce qu'elle soit de niveau 3, comme on avait en TP. Dans la boucle for, tous les étudiants qui ont redoublé plus de 2 fois passe à 2. Cela concerne un très faible échantillon
+
+
+```{r}
+dataCAH = data
+dataCAH = data[,-c(1,4,5,6,9,10,11,12,13,14,16,20,21)]
+size = dim(data)[1]
+for(i in 1:size)
+{
+  if(dataCAH$failures[i] > 2)
+  {
+    dataCAH$failures[i] = 2
+  }
+}
+dataCAH$failures = as.factor(dataCAH$failures)
+dataCAH <- dataCAH[c("failures", "Medu","Fedu", "studytime","goout", "Dalc","Walc","Average")]
+str(dataCAH)
+```
+On calcule la matrice des distances entre nos individus avec la fonction *dist*, puis on construit le dendrogramme à l'aide de la mesure de Ward, qui est une méthode pour calculer les distances entre les classes. 
+```{r}
+distCAH = dist(dataCAH[,2:8])
+hc <- hclust(distCAH, method = "ward.D2")
+```
+
+On plot ensuite notre dendrogramme. On voit qu'il contient beaucoup de sous classes mais que la démarcation se fait assez facilement.
+
+```{r}
+plot(hc,labels=dataCAH$failures)
+```
+<br/>On peut aussi regarder le barplot, qui dans notre cas est assez compliqué à voir.
+```{r}
+barplot(hc$height)
+```
+
+On utilise la fonction *rect.hclust* pour découper notre dendrogramme en **K** classes avec ici K = 3.
+```{r}
+plot(hc,labels=dataCAH$failures)
+rect.hclust(hc, k = 3)
+```
+
+On obtient les groupes:
+```{r}
+groupes.cah <- cutree(hc, k = 3)
+groupes.cah
+```
+```{r}
+table(groupes.cah)
+```
+On voit donc que l'on a 150 observations dans la classe 1, 132 dans la classe 2 et 113 dans la classe 3.
+
+### K-means
+```{r}
+dataKmeans = dataCAH
+str(dataKmeans)
+```
+Maintenant qu'on connait K, on peut le passer en entrée dans K-means
+
+```{r}
+K = 3
+kmeans.result=kmeans(dataKmeans[,2:8], centers = K)
+names(kmeans.result)
+```
+```{r}
+kmeans.result$size
+```
+```{r}
+kmeans.result$centers
+```
+```{r}
+#kmeans.result$cluster
+```
+#### Inerties intra et inter classes
+```{r}
+kmeans.result$totss  # Inertie totale
+```
+
+```{r}
+kmeans.result$withinss # Inertie intra-classes
+```
+
+
+
+```{r}
+kmeans.result$betweenss #Inertie inter-classes
+```
+On peut comparer la classification obtenue avec la repartition en 3 classes :
+```{r}
+table(dataCAH$failures, kmeans.result$cluster)
+```
+
+En regardant la sortie de table, on remarque que l'algorithme des K-means a vraiment eu du mal à classer les étudiants dans les 3 classes. En traçant la représentation des variables 2 à 2, on voit facilement qu'il y a très peu voire aucune linéarité entre les variables donc aucune corrélation ce qui fait que l'algorithme a du mal à partitionner efficacement **n** individus en **K** classes d'observations
+
+```{r}
+pairs(dataCAH[,2:8], col=kmeans.result$cluster)
+```
+<br/>On se sert de la fonction adjustedRandIndex de la libraire mclust pour calculer l’ARI entre nos deux classifications et on a un score de 0.52 donc très moyen
+
+```{r}
+library("mclust")
+adjustedRandIndex(kmeans.result$cluster,groupes.cah)
+```
+
+
+## Classification supervisée
+
+Maintenant que l'on connait le nombre de cluster, nous pouvons passé à la classification supervisée pour faire de la prédiction mais aussi pour pouvoir trouver une combinaison de variables nous permettant de séparer au mieux les *n* individus en K groupes.
+
+### ACP
+On applique une méthode d'analyse des composantes principales qui consiste à projetter au mieux nos variables dans un plan en maximisant l'inertie totale.
+
+```{r}
+
+dataPCA = data[,-c(4,5,6,9,10,11,12,13,14,15,16,20,21)]
+str(dataPCA)
+
+```
+On applique une ACP centrée réduite sur nos données
+```{r}
+library(FactoMineR)
+res = PCA(dataPCA,scale.unit = TRUE, graph = FALSE, quali.sup = 1) 
+```
+
+Valeurs propres et parts d’inertie expliquée par chaque axe
+```{r}
+res$eig
+```
+
+
+Barplot associé. On remarque que les deux premières composantes suffisent à expliquer 50% de la variance totale
+```{r}
+#barplot(res$eig[,2],col="blue")
+```
+
+
+Graphe des variables
+```{r}
+plot(res,choix = "var")
+```
+<br/>On remarque qu'il y a des variables pas très bien projetés comme **studytime** ou **Average**.Les deux axes expliquent à peine 50 % de l'inertie totale ce qui est très faible par rapport à ce que l'on avait en TP. Sur l'axe 1, on peut voir à droite les variables **Dalc**, **Walc** et **goout** corrélés positivement tandis que **studytime** est corrélé négativement. On a donc à droite les étudiants ne travaillant pas beaucoup, sortant assez souvent pour boire, etc... tandis qu'à gauche ceux qui travaillent plus et qui ont plus de chance d'avoir une moyenne haute,  ce qui semble logique. <br/>Sur l'axe 2, c'est un peu plus compliqué à distinguer mais on voit que **Medu** et **Fedu** sont bien projetés et corrélés positivement. Ainsi, on peut supposer que l'axe 2 oppose les étudiants dont les parents ont fais des études (en haut) contre ceux n'ayant pas fais d'études (en bas)
+
+
+**Graphe des individus** : 
+on voit clairement deux groupes : en bleu, les etudiants avec une bonne
+moyenne, sérieux et en rouge les étudiants festifs et travaillant moins. Toutefois, les points sont assez mélangés.
+```{r}
+plot(res,choix = "ind", habillage = 7, cex = 0.7)
+```
+
+
+Nous allons appliquer plusieurs méthode d'analyse discriminante que nous avons vu, puis effectuer une prédiction avec chacun d'eux.<br/>
+
+### LDA 
+
+```{r}
+
+library(MASS)
+dataLDA = dataCAH
+str(dataLDA)
+
+```
+
+```{r}
+res.afd.lda = lda(failures ~., data=dataLDA)
+res.afd.lda
+plot(res.afd.lda)
+```
+
+Les points sont mélangés et il est assez difficile d'en tirer des informations.
+
+Traçcage du cercle des corrélations
+```{r}
+F12 = predict(res.afd.lda, prior=rep(1/3,3))$x
+cercle_correlation=cor(dataLDA[,2:8],F12)
+cercle_correlation
+```
+```{r}
+a=seq(0,2* pi,length=100)
+plot(cos(a), sin(a), type='l',lty=3,xlab='Dim 1', ylab='Dim
+2',main="Cercle des corrélations" )
+arrows(0,0,cercle_correlation[,1],cercle_correlation[,2],col=2)
+text(cercle_correlation,labels=colnames(dataLDA[,2:8]))
+```
+<br/>On retrouve ce que l'on avait dans le graphe des variables. Les variables Dalc,Walc,goout sont très mal projetés, tandis que Average, Medu, Fedu eux sont bien projetés. La signification des axes est la même que pour le graphe des variables.
+
+### QDA
+```{r}
+res.qda = qda(failures ~., data=dataLDA)
+res.qda
+```
+### Prédictions avec des nouveaux individus 
+On veut à présent savoir si ces modèles prédisent bien un nouvel échantillon dans notre jeu de données, c'est-à-dire un nouvel étudiant. Pour comparer, on a crée deux dataframe, un représentant un élève sérieux avec de bons résultats et un autre moins sérieux.
+```{r}
+
+newdataGood= data.frame(Medu = 5, Fedu = 5, studytime = 4, goout = 1, Dalc = 0, Walc = 1,Average = 17.0)
+newdataBad= data.frame(Medu = 1, Fedu = 1, studytime = 0, goout = 4, Dalc = 4, Walc = 4, Average = 6.5)
+newdataGood
+newdataBad
+
+```
+
+**Avec LDA**:
+```{r}
+pred.ldaGood = predict(res.afd.lda,newdataGood)
+pred.ldaBad = predict(res.afd.lda,newdataBad)
+pred.ldaGood$posterior
+
+```
+```{r}
+pred.ldaBad$posterior
+```
+
+
+Le bon élève a été prédit qu'il n'a jamais redoublé avec une probabilité de 99.6 %. <br/>
+Le mauvais élève lui a été prédit qu'il a redoublé 2 fois avec une probabilité de 51.9%.<br/>Nos prédictions sont plutôt cohérentes même si elles sont à prendre avec précaution.<br/>
+**Avec QDA**:
+
+```{r}
+pred.qdaGood = predict(res.qda,newdataGood)
+pred.qdaBad = predict(res.qda,newdataBad)
+pred.qdaGood$posterior
+pred.qdaBad$posterior
+```
+Le bon élève a été prédit qu'il n'a jamais redoublé avec une probabilité de 99.9 %. <br/>
+Le mauvais élève lui a été prédit qu'il a redoublé 2 fois avec une probabilité de 48%.
+L'analyse quadratique semble plus efficace dans la prédiction que l'analyse linéaire. 
+
+
+### Prédiction avec jeu de données/jeu de tests et courbe ROC
+
+On va diviser notre jeu de données de manière à avoir 80% d'entre eux qui servent à l'entraînement et 20% aux tests.
+```{r}
+set.seed(1)
+n <- nrow(dataLDA)
+p <- ncol(dataLDA)-1
+test.ratio <- .2 # ratio of test/train samples
+n.test <- round(n*test.ratio)
+n.test
+tr <- sample(1:n,n.test)
+data.test <- dataLDA[tr,]
+data.train <- dataLDA[-tr,]
+```
+
+On applique **QDA** et **LDA**, puis on comparera nos résultats à l'aide de la courbe **ROC**
+```{r}
+#QDA
+res.afd.qda = qda(failures ~., data=data.train)
+res.afd.qda
+```
+
+
+```{r}
+#LDA
+res.afd.lda = lda(failures ~., data=data.train)
+res.afd.lda
+```
+
+On effectue maintenant les prédicitons avec la fonction *predict*
+
+```{r}
+#LDA
+pred.lda = predict(res.afd.lda,data.test)
+#pred.lda
+#QDA
+pred.qda = predict(res.afd.qda,data.test)
+#pred.qda
+```
+
+On trace maintenant les courbes ROC.
+```{r}
+# Aire sous la courbe
+library(pROC)
+#proba a posteriori de succes (dans la deuxi?me colonne) : 
+pred_lda <- pred.lda$posterior[,2]
+pred_qda <- pred.qda$posterior[,2]
+
+```
+
+
+```{r}
+ROC_lda <- roc(data.test$failures, pred_lda)
+ROC_qda <- roc(data.test$failures, pred_qda)
+```
+
+```{r}
+plot(ROC_lda, print.auc=TRUE,  print.auc.y = 0.5,xlim = c(1,0))
+plot(ROC_qda,add = TRUE,col = 2)
+legend('bottom', col=1:2, paste(c('lda', 'qda')),  lwd=1)
+```
+
+On remarque que les courbes ROC pour LDA et QDA sont assez différentes. En effet, l'aire sous la courbe pour LDA vaut 0.63 tandis que celle pour QDA vaut 0.52. Ainsi, les valeurs ne sont pas aussi élevés que celles qu'on avait en TP. De plus, on voit que le critère AUC pour LDA est meilleure que celui pour QDA ce qui peut être expliqué par le fait que les classes se chevauchent entre elles.
+
+```{r}
+ROC_lda$auc
+ROC_qda$auc
+```
+
+
+### CART
+On étudie la probabilité pour un lycéen d'appartenir a une famille nombreuse ou non en fonction de différents critères. La variable à prédire est la variable qualitative famsize à deux modalités :<br/>
+LE3 :3 membres ou moins dans sa famille, GT3 : plus de 3 membres dans sa famille.
+Pour cela, on construit l'arbre CART
+
+```{r}
+dataCart = data
+dataCart = data[,-c(2,3,4,5,6,8,9,10,11,12,13,14,15,16,17,18,20)]
+str(dataCart)
+```
+
+```{r}
+library(rpart)
+library(rpart.plot)
+arbre = rpart(famsize ~., dataCart,control = rpart.control(minsplit = 5))
+#print(arbre)
+rpart.plot(arbre,type = 1) #type = 1 pour mieux voir 
+```
+
+On obtient un arbre plutôt cohérent. Un étudiant ayant un *studytime* > 3 à 17% d'appartenir à une famille nombreuse tandis qu'un étudiant qui s'absente beaucoup et boit souvent aura 73% de chance d'être dans une famille peu nombreuse. Évidemment, cela n'est pas du tout représentatif de la vie réelle.
+
+
+
+
+
+#### Élagage
+On part de l'arbre le plus profond avec cp = 0
+```{r}
+arbre.opt = rpart(famsize ~., dataCart,control = rpart.control(minsplit = 5,cp = 0))
+rpart.plot(arbre.opt,type = 0)
+
+```
+<br/>On cherche la valeur de xerror la plus petite, ici c'est 1 donc cp optimal = 0
+```{r}
+set.seed(1)
+printcp(arbre.opt)
+
+```
+
+```{r}
+plotcp(arbre.opt)
+```
+
+### Prédiction
+
+```{r}
+
+PredCartGood = data.frame(studytime = 4,Walc = 1,absences = 0,Average = 16.5)
+PredCartBad = data.frame(studytime = 1,Walc = 4,absences = 40,Average = 7.5)
+predGood= predict(arbre.opt, newdata=PredCartGood, type="prob")
+predBad= predict(arbre.opt, newdata=PredCartBad, type="prob")
+predGood
+predBad
+
+```
+Bon élève prédit dans la famille peu nombreuse à 66%, et l'élève moins sérieux à lui 100% de chance d'avoir
+plus de 3 personnes dans sa famille. Ces conclusions ne sont pas représentatives bien-sûr, mais on peut toutefois se dire qu'un étudiant ayant peu de freres et soeur, a plus de temps pour travailler dans de bonnes conditions, etc... ce qui n'est pas forcèment le cas de quelqu'un vivant avec plus de 3 frères et soeurs.
+
+
+### Random Forest
+
+```{r}
+dataRF = dataCart
+str(dataRF)
+library(randomForest)
+```
+
+```{r}
+forest <- randomForest(famsize~.,dataRF)
+forest
+p=ncol(dataRF)
+sqrt(p)
+```
+On a 2 variables sélectionnes à chaque étapes.
+
+
+```{r}
+print(forest)
+```
+Importance des variables
+```{r}
+importance = forest$importance
+importance
+barplot(t(forest$importance),col="green")
+```
+
+Comparaison avec CART :
+```{r}
+arbre.opt$variable.importance
+```
+On trouve le même ordre d'importance pour CART et RandomForest.
+
+## Conclusion 
+Nous avons appliqué de nombreux modèles que ce soit la régression au 1er semestre puis la classification non supervisée avec **CAH** et **K-means** et enfin la classification supervisée avec les modèles d'analyses discriminantes (LDA,QDA), **ACP**,  **CART** et **RandomForest**. 
+Cela nous a permis de nous rendre compte que chaque jeu de données est différent et que tous les modèles ne fonctionnement pas toujours. Les jeu de données des séances de TP étaient conçus spécialement pour que les modèles fonctionnent "parfaitement".<br/>Dans notre cas à nous, notre jeu de données est exploitable pour du clustering par exemple mais pas pour de la régression comme on a pu le voir. Cela dit, se confronter à ce genre de problème permet par la suite de détecter plus rapidement les éventuelles incompatibilités du jeu de données ce qui est un atout important pour quelqu'un travaillant dans la data science et la statistique numérique.
+

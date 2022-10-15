@@ -1,0 +1,1696 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Projet Analyse de données},
+  pdfauthor={BERBAGUI Amine - HACHANI Ghassen},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Projet Analyse de données}
+\author{BERBAGUI Amine - HACHANI Ghassen}
+\date{22/05/2022}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+Ce jeu de données étudie les résultats en mathématiques de deux lycées
+au Portugal en fonction de plusieurs critères sociaux, démographiques et
+scolaires. On veut ainsi voir s'il y a une potentielle corrélation entre
+les notes d'un élève et les autres variables. Le but est d'appliquer les
+modèles de statistiques et de clustering vu tout au long de l'année.
+Pour plus d'informations sur la signification des variables, je vous
+invite à voir ce site directement :
+
+\url{http://archive.ics.uci.edu/ml/datasets/Student+Performance\#}
+
+\hypertarget{importation-des-donnuxe9es}{%
+\subsubsection{Importation des
+données}\label{importation-des-donnuxe9es}}
+
+On importe notre csv de manière classique. On remarque déjà qu'il est
+assez volumineux : 33 colonnes et 395 lignes. On va nettoyer ce csv car
+certaines colonnes ne nous intéresse pas forcèment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Users/Amine/Documents/\#Polytech/MAIN 4/S2/Analyse de données/Projet"}\NormalTok{)}
+\NormalTok{data }\OtherTok{=} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"student/student{-}mat.csv"}\NormalTok{,}\AttributeTok{sep=}\StringTok{";"}\NormalTok{,}\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   school sex age address famsize Pstatus Medu Fedu     Mjob     Fjob     reason
+## 1     GP   F  18       U     GT3       A    4    4  at_home  teacher     course
+## 2     GP   F  17       U     GT3       T    1    1  at_home    other     course
+## 3     GP   F  15       U     LE3       T    1    1  at_home    other      other
+## 4     GP   F  15       U     GT3       T    4    2   health services       home
+## 5     GP   F  16       U     GT3       T    3    3    other    other       home
+## 6     GP   M  16       U     LE3       T    4    3 services    other reputation
+##   guardian traveltime studytime failures schoolsup famsup paid activities
+## 1   mother          2         2        0       yes     no   no         no
+## 2   father          1         2        0        no    yes   no         no
+## 3   mother          1         2        3       yes     no  yes         no
+## 4   mother          1         3        0        no    yes  yes        yes
+## 5   father          1         2        0        no    yes  yes         no
+## 6   mother          1         2        0        no    yes  yes        yes
+##   nursery higher internet romantic famrel freetime goout Dalc Walc health
+## 1     yes    yes       no       no      4        3     4    1    1      3
+## 2      no    yes      yes       no      5        3     3    1    1      3
+## 3     yes    yes      yes       no      4        3     2    2    3      3
+## 4     yes    yes      yes      yes      3        2     2    1    1      5
+## 5     yes    yes       no       no      4        3     2    1    2      5
+## 6     yes    yes      yes       no      5        4     2    1    2      5
+##   absences G1 G2 G3
+## 1        6  5  6  6
+## 2        4  5  5  6
+## 3       10  7  8 10
+## 4        2 15 14 15
+## 5        4  6 10 10
+## 6       10 15 15 15
+\end{verbatim}
+
+\hypertarget{nettoyage-des-donnuxe9es}{%
+\subsubsection{Nettoyage des données}\label{nettoyage-des-donnuxe9es}}
+
+Dans un premier temps, on enlève les notes du S1(G1) , S2(G2) pour ne
+garder qu'une seule colonne représentant la moyenne finale car sinon,
+les colonnes G1,G2,G3 seront trop corréler entre elles. De plus, on a
+parfois des 0 comme moyennes qui peuvent poser prolème par la suite.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{dim}\NormalTok{(data)[}\DecValTok{1}\NormalTok{])}
+\NormalTok{\{}
+\NormalTok{  data}\SpecialCharTok{$}\NormalTok{Average[i] }\OtherTok{=}\NormalTok{ (data}\SpecialCharTok{$}\NormalTok{G1[i] }\SpecialCharTok{+}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{G2[i])}\SpecialCharTok{/}\DecValTok{2} 
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+On peut maintenant supprimer les colonnes inutiles comme le nom de
+l'école, le sexe, l'adresse, etc\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# supression des colonnes inutiles}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{guardian }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{age      }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{nursery  }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{internet }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{reason   }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{address  }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{sex      }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{school   }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{G1       }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{Pstatus  }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{G2       }\OtherTok{=} \ConstantTok{NULL}
+\NormalTok{data}\SpecialCharTok{$}\NormalTok{G3       }\OtherTok{=} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+Comme l'on a plusieurs variables qualitatives binaire (oui/non), on les
+met en as factor directement pour nos futurs modèles.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{size }\OtherTok{=} \FunctionTok{dim}\NormalTok{(data)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{colName }\OtherTok{=} \FunctionTok{names}\NormalTok{(data)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{size)}
+\NormalTok{\{}
+\NormalTok{  col }\OtherTok{=}\NormalTok{ data[i]}
+  
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{dim}\NormalTok{(}\FunctionTok{unique}\NormalTok{(col))[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \DecValTok{2}\NormalTok{)}
+\NormalTok{  \{}
+\NormalTok{    data[i] }\OtherTok{=} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{unlist}\NormalTok{(data[i]))}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  22 variables:
+##  $ famsize   : Factor w/ 2 levels "GT3","LE3": 1 1 2 1 1 2 2 1 2 1 ...
+##  $ Medu      : int  4 1 1 4 3 4 2 4 3 3 ...
+##  $ Fedu      : int  4 1 1 2 3 3 2 4 2 4 ...
+##  $ Mjob      : chr  "at_home" "at_home" "at_home" "health" ...
+##  $ Fjob      : chr  "teacher" "other" "other" "services" ...
+##  $ traveltime: int  2 1 1 1 1 1 1 2 1 1 ...
+##  $ studytime : int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ failures  : int  0 0 3 0 0 0 0 0 0 0 ...
+##  $ schoolsup : Factor w/ 2 levels "no","yes": 2 1 2 1 1 1 1 2 1 1 ...
+##  $ famsup    : Factor w/ 2 levels "no","yes": 1 2 1 2 2 2 1 2 2 2 ...
+##  $ paid      : Factor w/ 2 levels "no","yes": 1 1 2 2 2 2 1 1 2 2 ...
+##  $ activities: Factor w/ 2 levels "no","yes": 1 1 1 2 1 2 1 1 1 2 ...
+##  $ higher    : Factor w/ 2 levels "no","yes": 2 2 2 2 2 2 2 2 2 2 ...
+##  $ romantic  : Factor w/ 2 levels "no","yes": 1 1 1 2 1 1 1 1 1 1 ...
+##  $ famrel    : int  4 5 4 3 4 5 4 4 4 5 ...
+##  $ freetime  : int  3 3 3 2 3 4 4 1 2 5 ...
+##  $ goout     : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ Dalc      : int  1 1 2 1 1 1 1 1 1 1 ...
+##  $ Walc      : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ health    : int  3 3 3 5 5 5 3 1 1 5 ...
+##  $ absences  : int  6 4 10 2 4 10 0 6 0 0 ...
+##  $ Average   : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+\hypertarget{ruxe9gression-linuxe9aire-multiple}{%
+\subsection{Régression linéaire
+multiple}\label{ruxe9gression-linuxe9aire-multiple}}
+
+On décide d'appliquer un modèle de régression multiple en essayant
+d'expliquer \textbf{Average} en fonction de studytime (temps de travail)
+,famrel (relation avec sa famille), goout (le temps de sorties) et
+absences. On a choisi ces variables car elles nous semblaient être les
+plus pertinents pour expliquer une réussite ou un échec scolaire.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataRM }\OtherTok{=}\NormalTok{ data}
+\NormalTok{dataRM }\OtherTok{=}\NormalTok{ data[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{19}\NormalTok{,}\DecValTok{20}\NormalTok{)]}
+\FunctionTok{str}\NormalTok{(dataRM)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  5 variables:
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ famrel   : int  4 5 4 3 4 5 4 4 4 5 ...
+##  $ goout    : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ absences : int  6 4 10 2 4 10 0 6 0 0 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+En traçant un boxplot de nos données, on s'aperçoit que les boites à
+moustaches sont très compréssées, ce qui est normal car la majorité de
+nos variables quantitatives prennent leurs valeurs seulement entre 0 et
+5. La colonnes absences elle, contient des valeurs extrêmes comme on
+peut le voir. Cela correspond aux lycéens ayant un nombre d'absence très
+important
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(dataRM)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+On pose notre modèle linéaire
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res}\OtherTok{=}\FunctionTok{lm}\NormalTok{(Average }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataRM)}
+\end{Highlighting}
+\end{Shaded}
+
+On vérifie la colinéarité entre nos variables. On a des valeurs
+\textless{} à 10 donc c'est bon !
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Le chargement a nécessité le package : carData
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{vif}\NormalTok{(res) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## studytime    famrel     goout  absences 
+##  1.009458  1.008165  1.010574  1.007619
+\end{verbatim}
+
+\hypertarget{analyse-des-ruxe9sidus}{%
+\subsubsection{Analyse des résidus}\label{analyse-des-ruxe9sidus}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-10-1.pdf} Au
+niveau de l'analyse des résidus, on remarque qu'il n'y a pas de
+``trompette'' sur nos résidus qui vérifient l'homoscédasticité. En
+revanche, sur le dernier graphe en bas à droite, on voit que l'on a pas
+mal de valeurs en dehors de {[}-2,2{]} ce qui peut poser problème.
+Appliquons un test de Shapiro-Wilk pour voir la normalité.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  res$residuals
+## W = 0.99413, p-value = 0.1329
+\end{verbatim}
+
+On a une p-value = 0.13 \textgreater{} 5\% donc nos résidus sont bien
+gaussiens. Regardons maintenant ce que cela donne avec le log
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res}\OtherTok{=}\FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(Average) }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataRM)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-12-1.pdf} Le
+log ne semble pas arranger les choses, surtout au niveaux des valeurs
+atypiques. Voyons avec la racine carré.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res}\OtherTok{=}\FunctionTok{lm}\NormalTok{(}\FunctionTok{sqrt}\NormalTok{(Average) }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataRM)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-13-1.pdf}
+C'est beaucoup mieux avec la fonction racine. Il reste quelques points
+extrême à enlever mais la majorité sont dans l'intervalle {[}-2,2{]}. En
+revanche lorsque l'on réapplique le test de Shapiro-Wilk, nos résidus ne
+sont plus gaussiens. Ainsi, nous allons garder le modèle standard sans
+fonction appliquée dessus.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  res$residuals
+## W = 0.99253, p-value = 0.04563
+\end{verbatim}
+
+\hypertarget{suppression-des-points-extruxeames}{%
+\subsubsection{Suppression des points
+extrêmes}\label{suppression-des-points-extruxeames}}
+
+On récupère les points correspondants aux valeurs extrêmes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# on récupère les points plus grand que 2 en valeur absolue}
+\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))[}\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))}\SpecialCharTok{\textgreater{}}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       43       92      111      114      130      132      135      138 
+## 2.002646 2.041277 2.198767 2.048335 2.394406 2.197887 2.150213 3.502999 
+##      145      154      163      199      243      245      246      249 
+## 2.721004 2.862523 2.298207 2.246972 2.425819 2.676348 2.080944 2.380130 
+##      270      333      390 
+## 2.607944 2.485651 2.055205
+\end{verbatim}
+
+On les enlève un à un à chaque fois
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataRM2}\OtherTok{=}\NormalTok{dataRM[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{130}\NormalTok{),]}
+\NormalTok{res}\OtherTok{=}\FunctionTok{lm}\NormalTok{(Average }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataRM2)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\CommentTok{\#plot(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))[}\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))}\SpecialCharTok{\textgreater{}}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       43       92      105      111      114      138      145      154 
+## 2.321670 2.217823 2.002779 2.513583 2.396737 2.676125 2.077488 2.209300 
+##      199      245      246      249      266      270      307      333 
+## 2.581695 2.274294 2.367664 2.063226 2.203521 2.089858 2.192277 2.100625 
+##      375 
+## 2.281414
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataRM3}\OtherTok{=}\NormalTok{dataRM2[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{130}\NormalTok{,}\DecValTok{138}\NormalTok{),]}
+\NormalTok{res}\OtherTok{=}\FunctionTok{lm}\NormalTok{(Average }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataRM3)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\CommentTok{\#plot(res)}
+\end{Highlighting}
+\end{Shaded}
+
+La plupart de nos points extrêmes sont proche de 2 donc c'est bon.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))[}\FunctionTok{abs}\NormalTok{(}\FunctionTok{rstudent}\NormalTok{(res))}\SpecialCharTok{\textgreater{}}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       43       92      105      111      114      138      145      154 
+## 2.323959 2.237187 2.008974 2.522712 2.401474 2.686336 2.070126 2.207351 
+##      199      245      246      249      266      270      307      333 
+## 2.599930 2.284652 2.376763 2.071044 2.218194 2.088227 2.199564 2.104816 
+##      375 
+## 2.282312
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  res$residuals
+## W = 0.99438, p-value = 0.1602
+\end{verbatim}
+
+\hypertarget{points-leviers}{%
+\subsubsection{Points Leviers}\label{points-leviers}}
+
+Regardons si nos points de leviers risquent de perturber le modèle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(dataRM3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 392   5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{=} \FunctionTok{nrow}\NormalTok{(dataRM3)}
+\NormalTok{p }\OtherTok{=} \FunctionTok{ncol}\NormalTok{(dataRM3)}
+\NormalTok{inflm.SR }\OtherTok{\textless{}{-}} \FunctionTok{influence.measures}\NormalTok{(res)}
+\NormalTok{leviers}\OtherTok{=}\NormalTok{ inflm.SR}\SpecialCharTok{$}\NormalTok{infmat[,}\StringTok{"hat"}\NormalTok{]}
+\DecValTok{2}\SpecialCharTok{*}\NormalTok{p}\SpecialCharTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0255102
+\end{verbatim}
+
+On a 23 observations avec des leviers trop grands. Voyons s'ils
+perturbent le modèle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leviers[leviers}\SpecialCharTok{\textgreater{}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p}\SpecialCharTok{/}\NormalTok{n]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         26         67         75        104        109        141        151 
+## 0.03689561 0.04585912 0.09597294 0.02551468 0.05667756 0.03184332 0.02855455 
+##        184        185        205        206        208        260        277 
+## 0.10904625 0.03374986 0.02761548 0.02680558 0.03201354 0.02793810 0.20757217 
+##        281        300        308        316        331        350        358 
+## 0.02986477 0.03517606 0.04744738 0.05760901 0.02570181 0.02643526 0.03105571 
+##        390        392 
+## 0.03873962 0.02707826
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{obs }\OtherTok{=} \DecValTok{277}
+\NormalTok{dataRM[obs,]  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     studytime famrel goout absences Average
+## 277         2      4     1       75     9.5
+\end{verbatim}
+
+On a visualisé les points leviers et ils ne semblent pas perturber le
+modèle. En revanche, on voit clairement que nos données ne représente
+pas un comportement linéaire nous permettant de faire de la régression.
+Comme nos variables quantitatives ne peuvent prendre qu'une valeur dans
+un intervalle réduit (0 à 5), cela nous donne des graphes avec des
+points homogénéiquement distribués en ligne ou en colonne mais ne
+formant pas de lien entre eux. Finalement, la régression multiplie ne
+semble pas être pertinente dans notre jeu de données.
+
+\hypertarget{classification-non-supervisuxe9e}{%
+\subsection{Classification non
+supervisée}\label{classification-non-supervisuxe9e}}
+
+On passe maintenant à la classification non supervisée qui va nous
+permettre de faire du clustering sur nos données, c'est-à-dire de
+trouver une partition des individus en \textbf{K} classes à partir
+d'observations. On ne connait pas \textbf{K}, donc on fait une recherche
+à l'aveugle pour justement trouver un K optimal. On garde les variables
+qui nous intéresse
+
+\hypertarget{cah}{%
+\subsubsection{CAH}\label{cah}}
+
+On applique la CAH pour trouver K. On crée un nouveau jeu de données
+correspondant. Comme la colonne \textbf{failures} est de niveau 4
+(0,1,2,3), on l'a modifié de sorte à ce qu'elle soit de niveau 3, comme
+on avait en TP. Dans la boucle for, tous les étudiants qui ont redoublé
+plus de 2 fois passe à 2. Cela concerne un très faible échantillon
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataCAH }\OtherTok{=}\NormalTok{ data}
+\NormalTok{dataCAH }\OtherTok{=}\NormalTok{ data[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{21}\NormalTok{)]}
+\NormalTok{size }\OtherTok{=} \FunctionTok{dim}\NormalTok{(data)[}\DecValTok{1}\NormalTok{]}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{size)}
+\NormalTok{\{}
+  \ControlFlowTok{if}\NormalTok{(dataCAH}\SpecialCharTok{$}\NormalTok{failures[i] }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{)}
+\NormalTok{  \{}
+\NormalTok{    dataCAH}\SpecialCharTok{$}\NormalTok{failures[i] }\OtherTok{=} \DecValTok{2}
+\NormalTok{  \}}
+\NormalTok{\}}
+\NormalTok{dataCAH}\SpecialCharTok{$}\NormalTok{failures }\OtherTok{=} \FunctionTok{as.factor}\NormalTok{(dataCAH}\SpecialCharTok{$}\NormalTok{failures)}
+\NormalTok{dataCAH }\OtherTok{\textless{}{-}}\NormalTok{ dataCAH[}\FunctionTok{c}\NormalTok{(}\StringTok{"failures"}\NormalTok{, }\StringTok{"Medu"}\NormalTok{,}\StringTok{"Fedu"}\NormalTok{, }\StringTok{"studytime"}\NormalTok{,}\StringTok{"goout"}\NormalTok{, }\StringTok{"Dalc"}\NormalTok{,}\StringTok{"Walc"}\NormalTok{,}\StringTok{"Average"}\NormalTok{)]}
+\FunctionTok{str}\NormalTok{(dataCAH)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  8 variables:
+##  $ failures : Factor w/ 3 levels "0","1","2": 1 1 3 1 1 1 1 1 1 1 ...
+##  $ Medu     : int  4 1 1 4 3 4 2 4 3 3 ...
+##  $ Fedu     : int  4 1 1 2 3 3 2 4 2 4 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ goout    : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ Dalc     : int  1 1 2 1 1 1 1 1 1 1 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+On calcule la matrice des distances entre nos individus avec la fonction
+\emph{dist}, puis on construit le dendrogramme à l'aide de la mesure de
+Ward, qui est une méthode pour calculer les distances entre les classes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{distCAH }\OtherTok{=} \FunctionTok{dist}\NormalTok{(dataCAH[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{])}
+\NormalTok{hc }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(distCAH, }\AttributeTok{method =} \StringTok{"ward.D2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+On plot ensuite notre dendrogramme. On voit qu'il contient beaucoup de
+sous classes mais que la démarcation se fait assez facilement.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(hc,}\AttributeTok{labels=}\NormalTok{dataCAH}\SpecialCharTok{$}\NormalTok{failures)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-27-1.pdf} On
+peut aussi regarder le barplot, qui dans notre cas est assez compliqué à
+voir.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(hc}\SpecialCharTok{$}\NormalTok{height)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+On utilise la fonction \emph{rect.hclust} pour découper notre
+dendrogramme en \textbf{K} classes avec ici K = 3.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(hc,}\AttributeTok{labels=}\NormalTok{dataCAH}\SpecialCharTok{$}\NormalTok{failures)}
+\FunctionTok{rect.hclust}\NormalTok{(hc, }\AttributeTok{k =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+On obtient les groupes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{groupes.cah }\OtherTok{\textless{}{-}} \FunctionTok{cutree}\NormalTok{(hc, }\AttributeTok{k =} \DecValTok{3}\NormalTok{)}
+\NormalTok{groupes.cah}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 1 1 1 2 1 2 3 1 2 2 1 3 2 3 2 2 2 1 1 3 2 2 2 2 3 1 3 2 3 3 3 2 2 1 2 1 2
+##  [38] 2 2 3 1 2 2 1 1 1 2 2 2 1 2 2 3 3 3 1 2 2 1 2 3 1 1 3 3 2 3 1 1 2 2 1 1 3
+##  [75] 2 3 1 3 1 1 3 3 1 2 1 3 1 2 3 1 1 2 1 3 3 1 2 1 2 1 1 2 3 1 2 1 1 2 3 2 2
+## [112] 1 3 2 1 2 3 2 1 2 2 2 2 2 1 2 1 1 1 2 1 1 3 3 1 1 1 1 2 2 1 1 3 2 1 1 1 1
+## [149] 1 1 1 3 3 1 3 1 2 1 2 3 1 1 1 1 1 3 3 2 1 2 1 3 2 1 1 3 2 1 3 3 3 2 2 3 3
+## [186] 2 3 2 1 1 3 1 1 3 2 2 2 3 2 1 2 1 1 1 1 3 1 3 1 1 1 3 3 1 1 2 1 1 1 1 1 1
+## [223] 2 3 2 1 2 3 1 3 2 3 3 2 1 3 3 3 3 1 2 3 1 2 1 2 3 1 1 2 1 1 1 1 1 1 2 3 2
+## [260] 1 2 1 2 1 1 2 3 3 1 1 3 2 3 2 3 2 1 3 1 3 3 3 3 1 1 3 2 3 2 2 3 2 3 2 2 2
+## [297] 3 1 2 2 3 3 2 2 2 2 2 1 2 3 1 3 3 3 3 3 1 1 3 3 2 1 3 2 2 3 2 3 3 2 3 2 1
+## [334] 1 1 2 2 1 2 3 3 3 2 1 3 2 2 3 2 3 1 2 1 1 2 1 2 3 1 2 2 2 3 2 3 1 2 1 3 2
+## [371] 1 2 3 1 2 1 2 3 2 3 2 1 3 1 1 3 1 1 1 1 3 2 1 3 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(groupes.cah)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## groupes.cah
+##   1   2   3 
+## 150 132 113
+\end{verbatim}
+
+On voit donc que l'on a 150 observations dans la classe 1, 132 dans la
+classe 2 et 113 dans la classe 3.
+
+\hypertarget{k-means}{%
+\subsubsection{K-means}\label{k-means}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataKmeans }\OtherTok{=}\NormalTok{ dataCAH}
+\FunctionTok{str}\NormalTok{(dataKmeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  8 variables:
+##  $ failures : Factor w/ 3 levels "0","1","2": 1 1 3 1 1 1 1 1 1 1 ...
+##  $ Medu     : int  4 1 1 4 3 4 2 4 3 3 ...
+##  $ Fedu     : int  4 1 1 2 3 3 2 4 2 4 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ goout    : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ Dalc     : int  1 1 2 1 1 1 1 1 1 1 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+Maintenant qu'on connait K, on peut le passer en entrée dans K-means
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{K }\OtherTok{=} \DecValTok{3}
+\NormalTok{kmeans.result}\OtherTok{=}\FunctionTok{kmeans}\NormalTok{(dataKmeans[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], }\AttributeTok{centers =}\NormalTok{ K)}
+\FunctionTok{names}\NormalTok{(kmeans.result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+## [6] "betweenss"    "size"         "iter"         "ifault"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{size}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 163 107 125
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{centers}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Medu     Fedu studytime    goout     Dalc     Walc  Average
+## 1 2.803681 2.650307  2.079755 3.110429 1.607362 2.435583 10.92638
+## 2 3.140187 2.803738  2.196262 2.859813 1.205607 1.887850 15.07009
+## 3 2.344000 2.112000  1.840000 3.320000 1.552000 2.448000  7.01600
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#kmeans.result$cluster}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{inerties-intra-et-inter-classes}{%
+\paragraph{Inerties intra et inter
+classes}\label{inerties-intra-et-inter-classes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{totss  }\CommentTok{\# Inertie totale}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7245.403
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{withinss }\CommentTok{\# Inertie intra{-}classes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1318.8221  847.9065 1210.4320
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{betweenss }\CommentTok{\#Inertie inter{-}classes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3868.242
+\end{verbatim}
+
+On peut comparer la classification obtenue avec la repartition en 3
+classes :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(dataCAH}\SpecialCharTok{$}\NormalTok{failures, kmeans.result}\SpecialCharTok{$}\NormalTok{cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##       1   2   3
+##   0 142 100  70
+##   1  19   5  26
+##   2   2   2  29
+\end{verbatim}
+
+En regardant la sortie de table, on remarque que l'algorithme des
+K-means a vraiment eu du mal à classer les étudiants dans les 3 classes.
+En traçant la représentation des variables 2 à 2, on voit facilement
+qu'il y a très peu voire aucune linéarité entre les variables donc
+aucune corrélation ce qui fait que l'algorithme a du mal à partitionner
+efficacement \textbf{n} individus en \textbf{K} classes d'observations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pairs}\NormalTok{(dataCAH[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], }\AttributeTok{col=}\NormalTok{kmeans.result}\SpecialCharTok{$}\NormalTok{cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-41-1.pdf} On
+se sert de la fonction adjustedRandIndex de la libraire mclust pour
+calculer l'ARI entre nos deux classifications et on a un score de 0.52
+donc très moyen
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"mclust"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Package 'mclust' version 5.4.9
+## Type 'citation("mclust")' for citing this R package in publications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{adjustedRandIndex}\NormalTok{(kmeans.result}\SpecialCharTok{$}\NormalTok{cluster,groupes.cah)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5223843
+\end{verbatim}
+
+\hypertarget{classification-supervisuxe9e}{%
+\subsection{Classification
+supervisée}\label{classification-supervisuxe9e}}
+
+Maintenant que l'on connait le nombre de cluster, nous pouvons passé à
+la classification supervisée pour faire de la prédiction mais aussi pour
+pouvoir trouver une combinaison de variables nous permettant de séparer
+au mieux les \emph{n} individus en K groupes.
+
+\hypertarget{acp}{%
+\subsubsection{ACP}\label{acp}}
+
+On applique une méthode d'analyse des composantes principales qui
+consiste à projetter au mieux nos variables dans un plan en maximisant
+l'inertie totale.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataPCA }\OtherTok{=}\NormalTok{ data[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{21}\NormalTok{)]}
+\FunctionTok{str}\NormalTok{(dataPCA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  9 variables:
+##  $ famsize  : Factor w/ 2 levels "GT3","LE3": 1 1 2 1 1 2 2 1 2 1 ...
+##  $ Medu     : int  4 1 1 4 3 4 2 4 3 3 ...
+##  $ Fedu     : int  4 1 1 2 3 3 2 4 2 4 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ failures : int  0 0 3 0 0 0 0 0 0 0 ...
+##  $ goout    : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ Dalc     : int  1 1 2 1 1 1 1 1 1 1 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+On applique une ACP centrée réduite sur nos données
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(FactoMineR)}
+\NormalTok{res }\OtherTok{=} \FunctionTok{PCA}\NormalTok{(dataPCA,}\AttributeTok{scale.unit =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{graph =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{quali.sup =} \DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Valeurs propres et parts d'inertie expliquée par chaque axe
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res}\SpecialCharTok{$}\NormalTok{eig}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        eigenvalue percentage of variance cumulative percentage of variance
+## comp 1  2.2425569              28.031961                          28.03196
+## comp 2  1.8192002              22.740003                          50.77196
+## comp 3  1.0191134              12.738918                          63.51088
+## comp 4  0.9302555              11.628194                          75.13908
+## comp 5  0.6856998               8.571247                          83.71032
+## comp 6  0.6152255               7.690319                          91.40064
+## comp 7  0.3785340               4.731675                          96.13232
+## comp 8  0.3094146               3.867683                         100.00000
+\end{verbatim}
+
+Barplot associé. On remarque que les deux premières composantes
+suffisent à expliquer 50\% de la variance totale
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#barplot(res$eig[,2],col="blue")}
+\end{Highlighting}
+\end{Shaded}
+
+Graphe des variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(res,}\AttributeTok{choix =} \StringTok{"var"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-47-1.pdf} On
+remarque qu'il y a des variables pas très bien projetés comme
+\textbf{studytime} ou \textbf{Average}.Les deux axes expliquent à peine
+50 \% de l'inertie totale ce qui est très faible par rapport à ce que
+l'on avait en TP. Sur l'axe 1, on peut voir à droite les variables
+\textbf{Dalc}, \textbf{Walc} et \textbf{goout} corrélés positivement
+tandis que \textbf{studytime} est corrélé négativement. On a donc à
+droite les étudiants ne travaillant pas beaucoup, sortant assez souvent
+pour boire, etc\ldots{} tandis qu'à gauche ceux qui travaillent plus et
+qui ont plus de chance d'avoir une moyenne haute, ce qui semble logique.
+Sur l'axe 2, c'est un peu plus compliqué à distinguer mais on voit que
+\textbf{Medu} et \textbf{Fedu} sont bien projetés et corrélés
+positivement. Ainsi, on peut supposer que l'axe 2 oppose les étudiants
+dont les parents ont fais des études (en haut) contre ceux n'ayant pas
+fais d'études (en bas)
+
+\textbf{Graphe des individus} : on voit clairement deux groupes : en
+bleu, les etudiants avec une bonne moyenne, sérieux et en rouge les
+étudiants festifs et travaillant moins. Toutefois, les points sont assez
+mélangés.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(res,}\AttributeTok{choix =} \StringTok{"ind"}\NormalTok{, }\AttributeTok{habillage =} \DecValTok{7}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-48-1.pdf}
+
+Nous allons appliquer plusieurs méthode d'analyse discriminante que nous
+avons vu, puis effectuer une prédiction avec chacun d'eux.
+
+\hypertarget{lda}{%
+\subsubsection{LDA}\label{lda}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{dataLDA }\OtherTok{=}\NormalTok{ dataCAH}
+\FunctionTok{str}\NormalTok{(dataLDA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  8 variables:
+##  $ failures : Factor w/ 3 levels "0","1","2": 1 1 3 1 1 1 1 1 1 1 ...
+##  $ Medu     : int  4 1 1 4 3 4 2 4 3 3 ...
+##  $ Fedu     : int  4 1 1 2 3 3 2 4 2 4 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ goout    : int  4 3 2 2 2 2 4 4 2 1 ...
+##  $ Dalc     : int  1 1 2 1 1 1 1 1 1 1 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.afd.lda }\OtherTok{=} \FunctionTok{lda}\NormalTok{(failures }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{dataLDA)}
+\NormalTok{res.afd.lda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## lda(failures ~ ., data = dataLDA)
+## 
+## Prior probabilities of groups:
+##         0         1         2 
+## 0.7898734 0.1265823 0.0835443 
+## 
+## Group means:
+##       Medu     Fedu studytime    goout     Dalc     Walc   Average
+## 0 2.884615 2.647436  2.102564 3.051282 1.416667 2.205128 11.408654
+## 1 2.260000 2.160000  1.860000 3.240000 1.680000 2.500000  9.410000
+## 2 2.212121 1.878788  1.666667 3.454545 1.787879 2.787879  7.287879
+## 
+## Coefficients of linear discriminants:
+##                    LD1         LD2
+## Medu      -0.198408484  1.03190529
+## Fedu      -0.295530098 -0.41659212
+## studytime -0.281858879 -0.01566475
+## goout      0.093352928 -0.05946450
+## Dalc       0.252965190 -0.58613368
+## Walc       0.005514422  0.34423540
+## Average   -0.220978194 -0.13894894
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9653 0.0347
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(res.afd.lda)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-50-1.pdf}
+
+Les points sont mélangés et il est assez difficile d'en tirer des
+informations.
+
+Traçcage du cercle des corrélations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{F12 }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.afd.lda, }\AttributeTok{prior=}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{))}\SpecialCharTok{$}\NormalTok{x}
+\NormalTok{cercle\_correlation}\OtherTok{=}\FunctionTok{cor}\NormalTok{(dataLDA[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{],F12)}
+\NormalTok{cercle\_correlation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  LD1         LD2
+## Medu      -0.5296234  0.70582775
+## Fedu      -0.5305909  0.15415406
+## studytime -0.3749606 -0.01408700
+## goout      0.2494269  0.11107950
+## Dalc       0.3248591 -0.18999817
+## Walc       0.3180534  0.08440944
+## Average   -0.8404922 -0.30574598
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OtherTok{=}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\SpecialCharTok{*}\NormalTok{ pi,}\AttributeTok{length=}\DecValTok{100}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{cos}\NormalTok{(a), }\FunctionTok{sin}\NormalTok{(a), }\AttributeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{\textquotesingle{}Dim 1\textquotesingle{}}\NormalTok{, }\AttributeTok{ylab=}\StringTok{\textquotesingle{}Dim}
+\StringTok{2\textquotesingle{}}\NormalTok{,}\AttributeTok{main=}\StringTok{"Cercle des corrélations"}\NormalTok{ )}
+\FunctionTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,cercle\_correlation[,}\DecValTok{1}\NormalTok{],cercle\_correlation[,}\DecValTok{2}\NormalTok{],}\AttributeTok{col=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(cercle\_correlation,}\AttributeTok{labels=}\FunctionTok{colnames}\NormalTok{(dataLDA[,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-52-1.pdf} On
+retrouve ce que l'on avait dans le graphe des variables. Les variables
+Dalc,Walc,goout sont très mal projetés, tandis que Average, Medu, Fedu
+eux sont bien projetés. La signification des axes est la même que pour
+le graphe des variables.
+
+\hypertarget{qda}{%
+\subsubsection{QDA}\label{qda}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.qda }\OtherTok{=} \FunctionTok{qda}\NormalTok{(failures }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{dataLDA)}
+\NormalTok{res.qda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## qda(failures ~ ., data = dataLDA)
+## 
+## Prior probabilities of groups:
+##         0         1         2 
+## 0.7898734 0.1265823 0.0835443 
+## 
+## Group means:
+##       Medu     Fedu studytime    goout     Dalc     Walc   Average
+## 0 2.884615 2.647436  2.102564 3.051282 1.416667 2.205128 11.408654
+## 1 2.260000 2.160000  1.860000 3.240000 1.680000 2.500000  9.410000
+## 2 2.212121 1.878788  1.666667 3.454545 1.787879 2.787879  7.287879
+\end{verbatim}
+
+\hypertarget{pruxe9dictions-avec-des-nouveaux-individus}{%
+\subsubsection{Prédictions avec des nouveaux
+individus}\label{pruxe9dictions-avec-des-nouveaux-individus}}
+
+On veut à présent savoir si ces modèles prédisent bien un nouvel
+échantillon dans notre jeu de données, c'est-à-dire un nouvel étudiant.
+Pour comparer, on a crée deux dataframe, un représentant un élève
+sérieux avec de bons résultats et un autre moins sérieux.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newdataGood}\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Medu =} \DecValTok{5}\NormalTok{, }\AttributeTok{Fedu =} \DecValTok{5}\NormalTok{, }\AttributeTok{studytime =} \DecValTok{4}\NormalTok{, }\AttributeTok{goout =} \DecValTok{1}\NormalTok{, }\AttributeTok{Dalc =} \DecValTok{0}\NormalTok{, }\AttributeTok{Walc =} \DecValTok{1}\NormalTok{,}\AttributeTok{Average =} \FloatTok{17.0}\NormalTok{)}
+\NormalTok{newdataBad}\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Medu =} \DecValTok{1}\NormalTok{, }\AttributeTok{Fedu =} \DecValTok{1}\NormalTok{, }\AttributeTok{studytime =} \DecValTok{0}\NormalTok{, }\AttributeTok{goout =} \DecValTok{4}\NormalTok{, }\AttributeTok{Dalc =} \DecValTok{4}\NormalTok{, }\AttributeTok{Walc =} \DecValTok{4}\NormalTok{, }\AttributeTok{Average =} \FloatTok{6.5}\NormalTok{)}
+\NormalTok{newdataGood}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Medu Fedu studytime goout Dalc Walc Average
+## 1    5    5         4     1    0    1      17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newdataBad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Medu Fedu studytime goout Dalc Walc Average
+## 1    1    1         0     4    4    4     6.5
+\end{verbatim}
+
+\textbf{Avec LDA}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.ldaGood }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.afd.lda,newdataGood)}
+\NormalTok{pred.ldaBad }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.afd.lda,newdataBad)}
+\NormalTok{pred.ldaGood}\SpecialCharTok{$}\NormalTok{posterior}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           0           1            2
+## 1 0.9953614 0.004443433 0.0001951979
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.ldaBad}\SpecialCharTok{$}\NormalTok{posterior}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           0         1         2
+## 1 0.1341036 0.3461221 0.5197743
+\end{verbatim}
+
+Le bon élève a été prédit qu'il n'a jamais redoublé avec une probabilité
+de 99.6 \%. Le mauvais élève lui a été prédit qu'il a redoublé 2 fois
+avec une probabilité de 51.9\%.Nos prédictions sont plutôt cohérentes
+même si elles sont à prendre avec précaution. \textbf{Avec QDA}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.qdaGood }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.qda,newdataGood)}
+\NormalTok{pred.qdaBad }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.qda,newdataBad)}
+\NormalTok{pred.qdaGood}\SpecialCharTok{$}\NormalTok{posterior}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           0            1            2
+## 1 0.9998385 0.0001265318 3.498325e-05
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.qdaBad}\SpecialCharTok{$}\NormalTok{posterior}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           0         1         2
+## 1 0.1778878 0.3422088 0.4799035
+\end{verbatim}
+
+Le bon élève a été prédit qu'il n'a jamais redoublé avec une probabilité
+de 99.9 \%. Le mauvais élève lui a été prédit qu'il a redoublé 2 fois
+avec une probabilité de 48\%. L'analyse quadratique semble plus efficace
+dans la prédiction que l'analyse linéaire.
+
+\hypertarget{pruxe9diction-avec-jeu-de-donnuxe9esjeu-de-tests-et-courbe-roc}{%
+\subsubsection{Prédiction avec jeu de données/jeu de tests et courbe
+ROC}\label{pruxe9diction-avec-jeu-de-donnuxe9esjeu-de-tests-et-courbe-roc}}
+
+On va diviser notre jeu de données de manière à avoir 80\% d'entre eux
+qui servent à l'entraînement et 20\% aux tests.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(dataLDA)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(dataLDA)}\SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{test.ratio }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{2} \CommentTok{\# ratio of test/train samples}
+\NormalTok{n.test }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(n}\SpecialCharTok{*}\NormalTok{test.ratio)}
+\NormalTok{n.test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tr }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{n,n.test)}
+\NormalTok{data.test }\OtherTok{\textless{}{-}}\NormalTok{ dataLDA[tr,]}
+\NormalTok{data.train }\OtherTok{\textless{}{-}}\NormalTok{ dataLDA[}\SpecialCharTok{{-}}\NormalTok{tr,]}
+\end{Highlighting}
+\end{Shaded}
+
+On applique \textbf{QDA} et \textbf{LDA}, puis on comparera nos
+résultats à l'aide de la courbe \textbf{ROC}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#QDA}
+\NormalTok{res.afd.qda }\OtherTok{=} \FunctionTok{qda}\NormalTok{(failures }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{data.train)}
+\NormalTok{res.afd.qda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## qda(failures ~ ., data = data.train)
+## 
+## Prior probabilities of groups:
+##          0          1          2 
+## 0.78797468 0.12658228 0.08544304 
+## 
+## Group means:
+##       Medu     Fedu studytime    goout     Dalc     Walc   Average
+## 0 2.871486 2.626506  2.084337 3.052209 1.421687 2.216867 11.287149
+## 1 2.125000 2.050000  1.850000 3.250000 1.475000 2.450000  9.312500
+## 2 2.185185 1.962963  1.740741 3.333333 1.777778 2.703704  7.592593
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#LDA}
+\NormalTok{res.afd.lda }\OtherTok{=} \FunctionTok{lda}\NormalTok{(failures }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{data.train)}
+\NormalTok{res.afd.lda}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## lda(failures ~ ., data = data.train)
+## 
+## Prior probabilities of groups:
+##          0          1          2 
+## 0.78797468 0.12658228 0.08544304 
+## 
+## Group means:
+##       Medu     Fedu studytime    goout     Dalc     Walc   Average
+## 0 2.871486 2.626506  2.084337 3.052209 1.421687 2.216867 11.287149
+## 1 2.125000 2.050000  1.850000 3.250000 1.475000 2.450000  9.312500
+## 2 2.185185 1.962963  1.740741 3.333333 1.777778 2.703704  7.592593
+## 
+## Coefficients of linear discriminants:
+##                   LD1         LD2
+## Medu      -0.27732078  0.73879876
+## Fedu      -0.28444705 -0.07124924
+## studytime -0.22827945  0.13844660
+## goout      0.07370219 -0.24174587
+## Dalc       0.14885426  0.78986864
+## Walc       0.05629970 -0.12161780
+## Average   -0.21878708 -0.15765205
+## 
+## Proportion of trace:
+##    LD1    LD2 
+## 0.9401 0.0599
+\end{verbatim}
+
+On effectue maintenant les prédicitons avec la fonction \emph{predict}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#LDA}
+\NormalTok{pred.lda }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.afd.lda,data.test)}
+\CommentTok{\#pred.lda}
+\CommentTok{\#QDA}
+\NormalTok{pred.qda }\OtherTok{=} \FunctionTok{predict}\NormalTok{(res.afd.qda,data.test)}
+\CommentTok{\#pred.qda}
+\end{Highlighting}
+\end{Shaded}
+
+On trace maintenant les courbes ROC.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aire sous la courbe}
+\FunctionTok{library}\NormalTok{(pROC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Type 'citation("pROC")' for a citation.
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attachement du package : 'pROC'
+\end{verbatim}
+
+\begin{verbatim}
+## Les objets suivants sont masqués depuis 'package:stats':
+## 
+##     cov, smooth, var
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#proba a posteriori de succes (dans la deuxi?me colonne) : }
+\NormalTok{pred\_lda }\OtherTok{\textless{}{-}}\NormalTok{ pred.lda}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{2}\NormalTok{]}
+\NormalTok{pred\_qda }\OtherTok{\textless{}{-}}\NormalTok{ pred.qda}\SpecialCharTok{$}\NormalTok{posterior[,}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ROC\_lda }\OtherTok{\textless{}{-}} \FunctionTok{roc}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{failures, pred\_lda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in roc.default(data.test$failures, pred_lda): 'response' has more than
+## two levels. Consider setting 'levels' explicitly or using 'multiclass.roc'
+## instead
+\end{verbatim}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ROC\_qda }\OtherTok{\textless{}{-}} \FunctionTok{roc}\NormalTok{(data.test}\SpecialCharTok{$}\NormalTok{failures, pred\_qda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in roc.default(data.test$failures, pred_qda): 'response' has more than
+## two levels. Consider setting 'levels' explicitly or using 'multiclass.roc'
+## instead
+\end{verbatim}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls > cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(ROC\_lda, }\AttributeTok{print.auc=}\ConstantTok{TRUE}\NormalTok{,  }\AttributeTok{print.auc.y =} \FloatTok{0.5}\NormalTok{,}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(ROC\_qda,}\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{col =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{\textquotesingle{}bottom\textquotesingle{}}\NormalTok{, }\AttributeTok{col=}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}lda\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}qda\textquotesingle{}}\NormalTok{)),  }\AttributeTok{lwd=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-64-1.pdf}
+
+On remarque que les courbes ROC pour LDA et QDA sont assez différentes.
+En effet, l'aire sous la courbe pour LDA vaut 0.63 tandis que celle pour
+QDA vaut 0.52. Ainsi, les valeurs ne sont pas aussi élevés que celles
+qu'on avait en TP. De plus, on voit que le critère AUC pour LDA est
+meilleure que celui pour QDA ce qui peut être expliqué par le fait que
+les classes se chevauchent entre elles.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ROC\_lda}\SpecialCharTok{$}\NormalTok{auc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.6381
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ROC\_qda}\SpecialCharTok{$}\NormalTok{auc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.5238
+\end{verbatim}
+
+\hypertarget{cart}{%
+\subsubsection{CART}\label{cart}}
+
+On étudie la probabilité pour un lycéen d'appartenir a une famille
+nombreuse ou non en fonction de différents critères. La variable à
+prédire est la variable qualitative famsize à deux modalités : LE3 :3
+membres ou moins dans sa famille, GT3 : plus de 3 membres dans sa
+famille. Pour cela, on construit l'arbre CART
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataCart }\OtherTok{=}\NormalTok{ data}
+\NormalTok{dataCart }\OtherTok{=}\NormalTok{ data[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{16}\NormalTok{,}\DecValTok{17}\NormalTok{,}\DecValTok{18}\NormalTok{,}\DecValTok{20}\NormalTok{)]}
+\FunctionTok{str}\NormalTok{(dataCart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  5 variables:
+##  $ famsize  : Factor w/ 2 levels "GT3","LE3": 1 1 2 1 1 2 2 1 2 1 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ absences : int  6 4 10 2 4 10 0 6 0 0 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rpart)}
+\FunctionTok{library}\NormalTok{(rpart.plot)}
+\NormalTok{arbre }\OtherTok{=} \FunctionTok{rpart}\NormalTok{(famsize }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataCart,}\AttributeTok{control =} \FunctionTok{rpart.control}\NormalTok{(}\AttributeTok{minsplit =} \DecValTok{5}\NormalTok{))}
+\CommentTok{\#print(arbre)}
+\FunctionTok{rpart.plot}\NormalTok{(arbre,}\AttributeTok{type =} \DecValTok{1}\NormalTok{) }\CommentTok{\#type = 1 pour mieux voir }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-67-1.pdf}
+
+On obtient un arbre plutôt cohérent. Un étudiant ayant un
+\emph{studytime} \textgreater{} 3 à 17\% d'appartenir à une famille
+nombreuse tandis qu'un étudiant qui s'absente beaucoup et boit souvent
+aura 73\% de chance d'être dans une famille peu nombreuse. Évidemment,
+cela n'est pas du tout représentatif de la vie réelle.
+
+\hypertarget{uxe9lagage}{%
+\paragraph{Élagage}\label{uxe9lagage}}
+
+On part de l'arbre le plus profond avec cp = 0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{arbre.opt }\OtherTok{=} \FunctionTok{rpart}\NormalTok{(famsize }\SpecialCharTok{\textasciitilde{}}\NormalTok{., dataCart,}\AttributeTok{control =} \FunctionTok{rpart.control}\NormalTok{(}\AttributeTok{minsplit =} \DecValTok{5}\NormalTok{,}\AttributeTok{cp =} \DecValTok{0}\NormalTok{))}
+\FunctionTok{rpart.plot}\NormalTok{(arbre.opt,}\AttributeTok{type =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-68-1.pdf} On
+cherche la valeur de xerror la plus petite, ici c'est 1 donc cp optimal
+= 0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\FunctionTok{printcp}\NormalTok{(arbre.opt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Classification tree:
+## rpart(formula = famsize ~ ., data = dataCart, control = rpart.control(minsplit = 5, 
+##     cp = 0))
+## 
+## Variables actually used in tree construction:
+## [1] absences  Average   studytime Walc     
+## 
+## Root node error: 114/395 = 0.28861
+## 
+## n= 395 
+## 
+##          CP nsplit rel error xerror     xstd
+## 1 0.0122807      0   1.00000 1.0000 0.078995
+## 2 0.0116959     12   0.78947 1.0789 0.080730
+## 3 0.0087719     15   0.75439 1.0877 0.080908
+## 4 0.0058480     32   0.60526 1.2193 0.083258
+## 5 0.0043860     44   0.53509 1.2281 0.083393
+## 6 0.0035088     56   0.48246 1.2719 0.084033
+## 7 0.0029240     63   0.45614 1.2807 0.084154
+## 8 0.0021930     66   0.44737 1.2807 0.084154
+## 9 0.0000000     74   0.42982 1.3421 0.084928
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotcp}\NormalTok{(arbre.opt)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-70-1.pdf}
+
+\hypertarget{pruxe9diction}{%
+\subsubsection{Prédiction}\label{pruxe9diction}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PredCartGood }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{studytime =} \DecValTok{4}\NormalTok{,}\AttributeTok{Walc =} \DecValTok{1}\NormalTok{,}\AttributeTok{absences =} \DecValTok{0}\NormalTok{,}\AttributeTok{Average =} \FloatTok{16.5}\NormalTok{)}
+\NormalTok{PredCartBad }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{studytime =} \DecValTok{1}\NormalTok{,}\AttributeTok{Walc =} \DecValTok{4}\NormalTok{,}\AttributeTok{absences =} \DecValTok{40}\NormalTok{,}\AttributeTok{Average =} \FloatTok{7.5}\NormalTok{)}
+\NormalTok{predGood}\OtherTok{=} \FunctionTok{predict}\NormalTok{(arbre.opt, }\AttributeTok{newdata=}\NormalTok{PredCartGood, }\AttributeTok{type=}\StringTok{"prob"}\NormalTok{)}
+\NormalTok{predBad}\OtherTok{=} \FunctionTok{predict}\NormalTok{(arbre.opt, }\AttributeTok{newdata=}\NormalTok{PredCartBad, }\AttributeTok{type=}\StringTok{"prob"}\NormalTok{)}
+\NormalTok{predGood}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         GT3       LE3
+## 1 0.3333333 0.6666667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{predBad}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   GT3 LE3
+## 1   1   0
+\end{verbatim}
+
+Bon élève prédit dans la famille peu nombreuse à 66\%, et l'élève moins
+sérieux à lui 100\% de chance d'avoir plus de 3 personnes dans sa
+famille. Ces conclusions ne sont pas représentatives bien-sûr, mais on
+peut toutefois se dire qu'un étudiant ayant peu de freres et soeur, a
+plus de temps pour travailler dans de bonnes conditions, etc\ldots{} ce
+qui n'est pas forcèment le cas de quelqu'un vivant avec plus de 3 frères
+et soeurs.
+
+\hypertarget{random-forest}{%
+\subsubsection{Random Forest}\label{random-forest}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataRF }\OtherTok{=}\NormalTok{ dataCart}
+\FunctionTok{str}\NormalTok{(dataRF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    395 obs. of  5 variables:
+##  $ famsize  : Factor w/ 2 levels "GT3","LE3": 1 1 2 1 1 2 2 1 2 1 ...
+##  $ studytime: int  2 2 2 3 2 2 2 2 2 2 ...
+##  $ Walc     : int  1 1 3 1 2 2 1 1 1 1 ...
+##  $ absences : int  6 4 10 2 4 10 0 6 0 0 ...
+##  $ Average  : num  5.5 5 7.5 14.5 8 15 12 5.5 17 14.5 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## randomForest 4.7-1
+\end{verbatim}
+
+\begin{verbatim}
+## Type rfNews() to see new features/changes/bug fixes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(famsize}\SpecialCharTok{\textasciitilde{}}\NormalTok{.,dataRF)}
+\NormalTok{forest}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##  randomForest(formula = famsize ~ ., data = dataRF) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 35.95%
+## Confusion matrix:
+##     GT3 LE3 class.error
+## GT3 235  46   0.1637011
+## LE3  96  18   0.8421053
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p}\OtherTok{=}\FunctionTok{ncol}\NormalTok{(dataRF)}
+\FunctionTok{sqrt}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.236068
+\end{verbatim}
+
+On a 2 variables sélectionnes à chaque étapes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(forest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##  randomForest(formula = famsize ~ ., data = dataRF) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 35.95%
+## Confusion matrix:
+##     GT3 LE3 class.error
+## GT3 235  46   0.1637011
+## LE3  96  18   0.8421053
+\end{verbatim}
+
+Importance des variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{importance }\OtherTok{=}\NormalTok{ forest}\SpecialCharTok{$}\NormalTok{importance}
+\NormalTok{importance}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           MeanDecreaseGini
+## studytime         15.65299
+## Walc              21.80680
+## absences          38.19807
+## Average           55.21025
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{t}\NormalTok{(forest}\SpecialCharTok{$}\NormalTok{importance),}\AttributeTok{col=}\StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ProjetAdd_files/figure-latex/unnamed-chunk-75-1.pdf}
+
+Comparaison avec CART :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{arbre.opt}\SpecialCharTok{$}\NormalTok{variable.importance}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Average  absences      Walc studytime 
+## 45.785918 35.125875 21.356475  9.104837
+\end{verbatim}
+
+On trouve le même ordre d'importance pour CART et RandomForest.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+Nous avons appliqué de nombreux modèles que ce soit la régression au 1er
+semestre puis la classification non supervisée avec \textbf{CAH} et
+\textbf{K-means} et enfin la classification supervisée avec les modèles
+d'analyses discriminantes (LDA,QDA), \textbf{ACP}, \textbf{CART} et
+\textbf{RandomForest}. Cela nous a permis de nous rendre compte que
+chaque jeu de données est différent et que tous les modèles ne
+fonctionnement pas toujours. Les jeu de données des séances de TP
+étaient conçus spécialement pour que les modèles fonctionnent
+``parfaitement''.Dans notre cas à nous, notre jeu de données est
+exploitable pour du clustering par exemple mais pas pour de la
+régression comme on a pu le voir. Cela dit, se confronter à ce genre de
+problème permet par la suite de détecter plus rapidement les éventuelles
+incompatibilités du jeu de données ce qui est un atout important pour
+quelqu'un travaillant dans la data science et la statistique numérique.
+
+\end{document}
